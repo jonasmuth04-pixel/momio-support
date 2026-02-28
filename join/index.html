@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Event - momio</title>
+  <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: #000; color: #fff; font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px; }
+      .container { max-width: 360px; }
+      h1 { font-size: 32px; margin-bottom: 8px; }
+      .sub { color: rgba(255,255,255,0.6); font-size: 16px; margin-bottom: 32px; }
+      .btn { display: block; background: #b060e0; color: #fff; text-decoration: none; padding: 16px 32px; border-radius: 14px; font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+      .btn-secondary { background: rgba(255,255,255,0.1); }
+      .footer { margin-top: 40px; color: rgba(255,255,255,0.3); font-size: 13px; }
+    </style>
+    <script>
+        var token = new URLSearchParams(window.location.search).get('token');
+        setTimeout(function() {
+              if (token) window.location = 'momio://join?token=' + token;
+        }, 100);
+    </script>
+  </head>
+  <body>
+    <div class="container">
+        <h1>momio</h1>
+      <p class="sub">You've been invited to a shared album</p>p>
+      <a class="btn" href="https://apps.apple.com/app/id6758896961">Download momio</a>a>
+      <a class="btn btn-secondary" href="#" onclick="if(token)window.location='momio://join?token='+token;return false;">Open in App</a>a>
+      <p class="footer">momio - Everyone's photos. One album.</p>p>
+    </div>div>
+  </body>
+</html></h1>
+  </body>
+    </script>
+  </style></title>
+  </head>
+</html>
