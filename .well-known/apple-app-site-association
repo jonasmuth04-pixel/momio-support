@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "T6262D4DJ8.com.jonas.Momio",
+        "paths": ["/join/*"]
+      }
+    ]
+  }
+}
