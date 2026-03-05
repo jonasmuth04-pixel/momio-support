@@ -30,12 +30,8 @@
     var username = parts.length >= 2 ? parts[1] : null;
 
     if (username) {
-      // Copy referral code to clipboard
       var refCode = 'ref:' + username.toLowerCase();
-      navigator.clipboard.writeText(refCode).then(function() {
-        document.getElementById('copied').style.display = 'block';
-      }).catch(function() {
-        // Fallback for older browsers
+      navigator.clipboard.writeText(refCode).catch(function() {
         var ta = document.createElement('textarea');
         ta.value = refCode;
         ta.style.position = 'fixed';
@@ -44,8 +40,8 @@
         ta.select();
         document.execCommand('copy');
         document.body.removeChild(ta);
-        document.getElementById('copied').style.display = 'block';
       });
+      window.location.replace('https://apps.apple.com/app/id6758896961');
     }
   </script>
 </body>
