@@ -8,7 +8,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #000; color: #fff; font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px; }
     .container { max-width: 360px; }
-    .logo { font-size: 42px; font-weight: 700; margin-bottom: 4px; }
+    .icon { width: 100px; height: 100px; border-radius: 22px; margin-bottom: 20px; }
     .sub { color: rgba(255,255,255,0.6); font-size: 17px; margin-bottom: 40px; line-height: 1.4; }
     .btn { display: block; color: #fff; text-decoration: none; padding: 16px 32px; border-radius: 14px; font-size: 18px; font-weight: 600; margin-bottom: 12px; cursor: pointer; border: none; width: 100%; }
     .btn-primary { background: #b060e0; }
@@ -17,13 +17,13 @@
 </head>
 <body>
   <div class="container" id="referral" style="display:none;">
-    <p class="logo">momio</p>
+    <img src="/logo.png" alt="momio" class="icon">
     <p class="sub">Your friend invited you to momio — the app that syncs everyone's photos automatically</p>
     <button class="btn btn-primary" id="go">Download momio</button>
     <p class="footer">Everyone's photos. One album. Automatic.</p>
   </div>
   <div class="container" id="notfound">
-    <p class="logo">momio</p>
+    <img src="/logo.png" alt="momio" class="icon">
     <p class="sub">Page not found</p>
     <a class="btn btn-primary" href="https://apps.apple.com/app/id6758896961">Download momio</a>
   </div>
@@ -38,7 +38,6 @@
       var refCode = 'ref:' + username.toLowerCase();
 
       document.getElementById('go').addEventListener('click', function() {
-        // Copy on user tap — Safari allows this
         navigator.clipboard.writeText(refCode).then(function() {
           window.location.href = 'https://apps.apple.com/app/id6758896961';
         }).catch(function() {
