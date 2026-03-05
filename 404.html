@@ -30,13 +30,10 @@
     // Handle /ref/username paths
     if (parts.length >= 2 && parts[0] === 'ref') {
       var username = parts[1];
-      document.getElementById('subtitle').textContent =
-        'Your friend invited you to momio \u2014 the app that syncs everyone\u2019s photos automatically';
-
       var refCode = 'ref:' + username.toLowerCase();
-      navigator.clipboard.writeText(refCode).then(function() {
-        document.getElementById('copied').style.display = 'block';
-      }).catch(function() {
+
+      // Copy referral code, then redirect to App Store
+      navigator.clipboard.writeText(refCode).catch(function() {
         var ta = document.createElement('textarea');
         ta.value = refCode;
         ta.style.position = 'fixed';
@@ -45,8 +42,9 @@
         ta.select();
         document.execCommand('copy');
         document.body.removeChild(ta);
-        document.getElementById('copied').style.display = 'block';
       });
+
+      window.location.replace('https://apps.apple.com/app/id6758896961');
     }
   </script>
 </body>
