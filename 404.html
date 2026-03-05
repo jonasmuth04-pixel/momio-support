@@ -12,39 +12,47 @@
     .sub { color: rgba(255,255,255,0.6); font-size: 17px; margin-bottom: 40px; line-height: 1.4; }
     .btn { display: block; color: #fff; text-decoration: none; padding: 16px 32px; border-radius: 14px; font-size: 18px; font-weight: 600; margin-bottom: 12px; cursor: pointer; border: none; width: 100%; }
     .btn-primary { background: #b060e0; }
-    .check { color: #4ade80; font-size: 15px; margin-bottom: 24px; display: none; }
     .footer { margin-top: 48px; color: rgba(255,255,255,0.3); font-size: 13px; }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="referral" style="display:none;">
     <p class="logo">momio</p>
-    <p class="sub" id="subtitle">Page not found</p>
-    <p class="check" id="copied">Referral code copied!</p>
-    <a class="btn btn-primary" href="https://apps.apple.com/app/id6758896961">Download momio</a>
+    <p class="sub">Your friend invited you to momio — the app that syncs everyone's photos automatically</p>
+    <button class="btn btn-primary" id="go">Download momio</button>
     <p class="footer">Everyone's photos. One album. Automatic.</p>
+  </div>
+  <div class="container" id="notfound">
+    <p class="logo">momio</p>
+    <p class="sub">Page not found</p>
+    <a class="btn btn-primary" href="https://apps.apple.com/app/id6758896961">Download momio</a>
   </div>
   <script>
     var parts = window.location.pathname.split('/').filter(Boolean);
 
-    // Handle /ref/username paths
     if (parts.length >= 2 && parts[0] === 'ref') {
+      document.getElementById('notfound').style.display = 'none';
+      document.getElementById('referral').style.display = 'block';
+
       var username = parts[1];
       var refCode = 'ref:' + username.toLowerCase();
 
-      // Copy referral code, then redirect to App Store
-      navigator.clipboard.writeText(refCode).catch(function() {
-        var ta = document.createElement('textarea');
-        ta.value = refCode;
-        ta.style.position = 'fixed';
-        ta.style.left = '-9999px';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
+      document.getElementById('go').addEventListener('click', function() {
+        // Copy on user tap — Safari allows this
+        navigator.clipboard.writeText(refCode).then(function() {
+          window.location.href = 'https://apps.apple.com/app/id6758896961';
+        }).catch(function() {
+          var ta = document.createElement('textarea');
+          ta.value = refCode;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          window.location.href = 'https://apps.apple.com/app/id6758896961';
+        });
       });
-
-      window.location.replace('https://apps.apple.com/app/id6758896961');
     }
   </script>
 </body>
