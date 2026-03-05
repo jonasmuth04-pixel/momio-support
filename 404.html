@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join momio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; color: #fff; font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px; }
+    .container { max-width: 360px; }
+    .logo { font-size: 42px; font-weight: 700; margin-bottom: 4px; }
+    .sub { color: rgba(255,255,255,0.6); font-size: 17px; margin-bottom: 40px; line-height: 1.4; }
+    .btn { display: block; color: #fff; text-decoration: none; padding: 16px 32px; border-radius: 14px; font-size: 18px; font-weight: 600; margin-bottom: 12px; cursor: pointer; border: none; width: 100%; }
+    .btn-primary { background: #b060e0; }
+    .check { color: #4ade80; font-size: 15px; margin-bottom: 24px; display: none; }
+    .footer { margin-top: 48px; color: rgba(255,255,255,0.3); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p class="logo">momio</p>
+    <p class="sub" id="subtitle">Page not found</p>
+    <p class="check" id="copied">Referral code copied!</p>
+    <a class="btn btn-primary" href="https://apps.apple.com/app/id6758896961">Download momio</a>
+    <p class="footer">Everyone's photos. One album. Automatic.</p>
+  </div>
+  <script>
+    var parts = window.location.pathname.split('/').filter(Boolean);
+
+    // Handle /ref/username paths
+    if (parts.length >= 2 && parts[0] === 'ref') {
+      var username = parts[1];
+      document.getElementById('subtitle').textContent =
+        'Your friend invited you to momio \u2014 the app that syncs everyone\u2019s photos automatically';
+
+      var refCode = 'ref:' + username.toLowerCase();
+      navigator.clipboard.writeText(refCode).then(function() {
+        document.getElementById('copied').style.display = 'block';
+      }).catch(function() {
+        var ta = document.createElement('textarea');
+        ta.value = refCode;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        document.getElementById('copied').style.display = 'block';
+      });
+    }
+  </script>
+</body>
+</html>
