@@ -16,6 +16,7 @@
     .btn { display: block; color: #fff; text-decoration: none; padding: 16px 32px; border-radius: 14px; font-size: 18px; font-weight: 600; margin-bottom: 12px; cursor: pointer; border: none; width: 100%; }
     .btn-primary { background: #b060e0; }
     .check { color: #4ade80; font-size: 15px; margin-bottom: 24px; display: none; }
+    .hint { color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 16px; line-height: 1.5; }
     .footer { margin-top: 48px; color: rgba(255,255,255,0.3); font-size: 13px; }
   </style>
 </head>
@@ -23,8 +24,9 @@
   <div class="container">
     <p class="logo">momio</p>
     <p class="sub">Your friend invited you to momio — the app that syncs everyone's photos automatically</p>
-    <p class="check" id="copied">Referral code copied!</p>
+    <p class="check" id="copied">✓ Invite link saved</p>
     <a class="btn btn-primary" id="download" href="https://apps.apple.com/app/id6758896961">Download momio</a>
+    <p class="hint" id="hint"></p>
     <p class="footer">Everyone's photos. One album. Automatic.</p>
   </div>
   <script>
@@ -34,7 +36,9 @@
 
     if (username) {
       var refCode = 'ref:' + username.toLowerCase();
-      navigator.clipboard.writeText(refCode).catch(function() {
+      navigator.clipboard.writeText(refCode).then(function() {
+        document.getElementById('copied').style.display = 'block';
+      }).catch(function() {
         var ta = document.createElement('textarea');
         ta.value = refCode;
         ta.style.position = 'fixed';
@@ -43,8 +47,9 @@
         ta.select();
         document.execCommand('copy');
         document.body.removeChild(ta);
+        document.getElementById('copied').style.display = 'block';
       });
-      window.location.replace('https://apps.apple.com/app/id6758896961');
+      document.getElementById('hint').textContent = 'After downloading, allow momio to paste so you\'ll be connected with @' + username.toLowerCase() + ' automatically.';
     }
   </script>
 </body>
